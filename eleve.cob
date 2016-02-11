@@ -312,8 +312,7 @@
 	     INVALID KEY
                DISPLAY "La matiere " NIDX-MAT " n'existe pas !"
          NOT INVALID KEY
-           SET PERF-END TO 0
-           PERFORM UNTIL PERF-END-OK
+           
            READ NIDX NEXT
              AT END
                SET PERF-END-OK TO TRUE
@@ -324,7 +323,7 @@
                MOVE RECH-MOY TO NIDX-MOY
                REWRITE NIDX-ENRG
            END-READ
-         END-PERFORM
+         
        END-START
        CLOSE NIDX
        .
