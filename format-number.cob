@@ -1,12 +1,12 @@
       ******************************************************************
       **  P R O G R A M M E  DEBUT  ------------  DEBUT  S O U R C E  **
       **  ecrit en COBOL-85 sous OpenCobol                            **
-      **  minmax.cob                                  Version 1.1 PC  **
+      **  format-number.cob                           Version 1.1 PC  **
       ******************************************************************
-      **  Les fonctions intrinseques                                  **
+      **  Formatter un nombre décimal                                 **
       **  ----------------------------------------------------------  **
       **  Objet :                                                     **
-      **  - determiner le + grd et le + petit de 3 nb saisis          **
+      **  - Avoir un affichage plus humain d'un nombre décimal        **
       ******************************************************************
        IDENTIFICATION DIVISION.
        PROGRAM-ID.                                        format-number.
@@ -16,9 +16,12 @@
       * ++============================================================++
       * ++===                                donnees de traitement ===++
       * ++============================================================++
-        01 NUMBER-CUTTED.
-          05 ENTIER PIC 99.
-          05 DECIMAL PIC 99.
+        01 NUMBER-CUTTED PIC ZZ.99.
+        
+        01 NUMBER-CUTTED-FORMAT.
+           05 ENTIER PIC ZZ.
+           05 PIC X.
+           05 DECIMAL PIC 99.
 
 
 
@@ -33,10 +36,20 @@
 
 
 
-
+      * Dans un premier temps on retire les zéros inutiles du nombre
           MOVE RAW-NUMBER TO NUMBER-CUTTED
-          STRING ENTIER"."DECIMAL INTO FORMATTED-NUMBER
-
+      * puis on découpe celui-ci en un entier et un décimal    
+          MOVE NUMBER-CUTTED TO NUMBER-CUTTED-FORMAT
+      
+      * Si le nombre entier est un zéro on affiche un zéro directement
+      * pour avoir un meilleur affichage   
+          IF (ENTIER = SPACE)
+            STRING " 0,"DECIMAL INTO  FORMATTED-NUMBER
+      
+      * Sinon affichage entier,décimal    
+          ELSE
+            STRING ENTIER","DECIMAL INTO  FORMATTED-NUMBER
+		  END-IF
        EXIT PROGRAM.
       ******************************************************************
       **  minmax.cob                                  Version 1.1 PC  **
