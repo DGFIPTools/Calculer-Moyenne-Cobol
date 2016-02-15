@@ -18,6 +18,8 @@
       * ++============================================================++
         01 NUMBER-CUTTED PIC ZZ.99.
         
+        77 DIVIDER PIC X VALUE ",".
+        
         01 NUMBER-CUTTED-FORMAT.
            05 ENTIER PIC ZZ.
            05 PIC X.
@@ -44,11 +46,11 @@
       * Si le nombre entier est un zéro on affiche un zéro directement
       * pour avoir un meilleur affichage   
           IF (ENTIER = SPACE)
-            STRING " 0,"DECIMAL INTO  FORMATTED-NUMBER
+            STRING " 0" DIVIDER DECIMAL INTO  FORMATTED-NUMBER
       
       * Sinon affichage entier,décimal    
           ELSE
-            STRING ENTIER","DECIMAL INTO  FORMATTED-NUMBER
+            STRING ENTIER DIVIDER DECIMAL INTO  FORMATTED-NUMBER
 		  END-IF
        EXIT PROGRAM.
       ******************************************************************
